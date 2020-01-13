@@ -1,24 +1,12 @@
 apiVersion: build.openshift.io/v1
 kind: BuildConfig
 metadata:
-  annotations:
-    openshift.io/generated-by: OpenShiftWebConsole
-  creationTimestamp: '2020-01-13T14:00:46Z'
-  labels:
-    app: python-app
-  name: python-app-dockerBuild
-  namespace: python-app
-  resourceVersion: '35372'
-  selfLink: /apis/build.openshift.io/v1/namespaces/python-app/buildconfigs/python-app
-  uid: 186f9e5d-360d-11ea-9abf-080027acc499
+  name: python-app-docker
 spec:
-  nodeSelector: null
   output:
     to:
       kind: ImageStreamTag
-      name: 'python-app-dockerBuild:latest'
-  postCommit: {}
-  resources: {}
+      name: 'python-app-docker:latest'
   runPolicy: Serial
   source:
     git:
@@ -27,9 +15,6 @@ spec:
     type: Git
   strategy:
     dockerStrategy:
-      from:
-        kind: "DockerImage"
-        name: 'ubuntu:18.04'
     type: Docker
   triggers:
     - imageChange:
@@ -43,6 +28,4 @@ spec:
     - github:
         secret: 29f5db14d720531f
       type: GitHub
-status:
-  lastVersion: 5
 
