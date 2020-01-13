@@ -1,2 +1,2 @@
 # pyapp
-simple pyapp for setting up openshift apps
+simple python app for setting up openshift apps
