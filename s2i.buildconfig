@@ -1,0 +1,49 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftWebConsole
+  creationTimestamp: '2020-01-13T14:00:46Z'
+  labels:
+    app: python-app
+  name: python-app
+  namespace: python-app
+  resourceVersion: '35372'
+  selfLink: /apis/build.openshift.io/v1/namespaces/python-app/buildconfigs/python-app
+  uid: 186f9e5d-360d-11ea-9abf-080027acc499
+spec:
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'python-app:latest'
+  postCommit: {}
+  resources: {}
+  runPolicy: Serial
+  source:
+    git:
+      ref: master
+      uri: 'https://github.com/georgfedermann/pyapp.git'
+    type: Git
+  strategy:
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        name: 'python:3.6'
+        namespace: openshift
+    type: Source
+  triggers:
+    - imageChange:
+        lastTriggeredImageID: >-
+          172.30.1.1:5000/openshift/python@sha256:fa4a5d0676a56e7666bce355bbbaa8fa2737d2b9d04444d1f8ee383434da798e
+      type: ImageChange
+    - type: ConfigChange
+    - generic:
+        secret: 180ff4a80d9e0b81
+      type: Generic
+    - github:
+        secret: 29f5db14d720531f
+      type: GitHub
+status:
+  lastVersion: 5
+
